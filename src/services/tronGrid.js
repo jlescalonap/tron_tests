@@ -20,7 +20,8 @@ const validateWallet = async (wallet) => {
   return response;
 };
 
-const ativateWallet = async (wallet) => {
+// Create an account. Uses an already activated account to create a new account
+const createAccount = async (wallet) => {
   const url = "https://api.shasta.trongrid.io/wallet/createaccount";
 
   const requestData = {
@@ -75,7 +76,7 @@ const walletInfo = async (wallet) => {
 
 module.exports = {
   validateWallet,
-  ativateWallet,
+  createAccount,
   walletInfo,
   createTx,
 };

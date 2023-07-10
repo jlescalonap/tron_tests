@@ -3,17 +3,14 @@ require("dotenv").config();
 const TronWeb = require("tronweb");
 const {
   validateWallet,
-  ativateWallet,
   walletInfo,
   createTx,
+  createAccount,
 } = require("./services/tronGrid");
-const HttpProvider = TronWeb.providers.HttpProvider; // No se aun para que se usa esto
+const HttpProvider = TronWeb.providers.HttpProvider; 
 const fullNode = new HttpProvider("https://api.shasta.trongrid.io");
-// const fullNode = "https://testhttpapi.tronex.io/wallet/";
 const solidityNode = new HttpProvider("https://api.shasta.trongrid.io");
-// const solidityNode = "https://testhttpapi.tronex.io";
 const eventServer = new HttpProvider("https://api.shasta.trongrid.io");
-// const eventServer = "https://testhttpapi.tronex.io";
 
 const sideOptions = {
   fullNode: "https://suntest.tronex.io",
@@ -38,23 +35,22 @@ const tronWeb = new TronWeb(fullNode, solidityNode, eventServer, process.env.PRI
 tronWeb.setHeader({ "TRON-PRO-API-KEY": process.env.TRON_API_KEY });
 
 // Cria uma nova wallet
-let newWallet = async () => {
+/* let newWallet = async () => {
   const w = await tronWeb.createAccount();
   const wallet = JSON.parse(JSON.stringify(w));
   console.log(wallet);
-  return wallet;
 };
 
-// newWallet();
+newWallet(); */
 
-// validateWallet(process.env.WALLET_ADDRESS)
-// ativateWallet(process.env.WALLET_ADDRESS);
-// walletInfo(process.env.WALLET_ADDRESS);
+// validateWallet('TQwMq3akn9CFDvBfR2sbDocCh9EJXXQ3F6')
+// createAccount('TQwMq3akn9CFDvBfR2sbDocCh9EJXXQ3F6');
+// walletInfo('TQwMq3akn9CFDvBfR2sbDocCh9EJXXQ3F6');
 
 const main = async () => {
   const to = "TUw7BRkwvCnfKbsmnQZUUXiwaTPQ1hMYar";
 
-  const unSignedTxn = await tronWeb.transactionBuilder.sendTrx(to, 1000000, process.env.WALLET_ADDRESS).catch((e) => {
+  const unSignedTxn = await tronWeb.transactionBuilder.sendTrx(to, 2000000, process.env.WALLET_ADDRESS).catch((e) => {
     console.log(e);
   });
 
