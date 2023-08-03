@@ -6,6 +6,7 @@ const {
   walletInfo,
   createTx,
   createAccount,
+  confirmTx,
 } = require("./services/tronGrid");
 const HttpProvider = TronWeb.providers.HttpProvider; 
 const fullNode = new HttpProvider("https://api.shasta.trongrid.io");
@@ -47,23 +48,25 @@ newWallet(); */
 // createAccount('TQwMq3akn9CFDvBfR2sbDocCh9EJXXQ3F6');
 // walletInfo('TQwMq3akn9CFDvBfR2sbDocCh9EJXXQ3F6');
 
+
 const main = async () => {
   const to = "TUw7BRkwvCnfKbsmnQZUUXiwaTPQ1hMYar";
-
+  
   const unSignedTxn = await tronWeb.transactionBuilder.sendTrx(to, 2000000, process.env.WALLET_ADDRESS).catch((e) => {
     console.log(e);
   });
-
+  
   const signedTxn = await tronWeb.trx.sign(unSignedTxn).catch((e) => {
     console.log(e);
   });
-
+  
   const broadCast = await tronWeb.trx.sendRawTransaction(signedTxn).catch((e) => {
     console.log(e);
   });
-
+  
   console.log(broadCast);
-
+  
 };
 
-main();
+// main();
+confirmTx('dd8ef98e3d732bf049af5dcd0c6b194e216bd7f7dc69d01d27d131442d0080a8');

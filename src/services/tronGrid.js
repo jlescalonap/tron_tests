@@ -41,6 +41,19 @@ const createAccount = async (wallet) => {
   return response;
 };
 
+const confirmTx = async (txId) => {
+  const url = `https://api.shasta.trongrid.io/v1/transactions/${txId}/events`
+
+  const requestData = {
+    transactionID: txId,
+  };
+  
+  const response = await axios.get(url);
+
+  console.log(response.data)
+  return response.data;
+}
+
 const createTx = async (ownerWallet, toAddress, amount) => {
   const url = "https://api.shasta.trongrid.io/wallet/createtransaction";
   const requestData = {
@@ -75,8 +88,9 @@ const walletInfo = async (wallet) => {
 };
 
 module.exports = {
-  validateWallet,
+  confirmTx,
   createAccount,
-  walletInfo,
   createTx,
+  validateWallet,
+  walletInfo,
 };
